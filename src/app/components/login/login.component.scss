@@ -1,0 +1,22 @@
+.body {
+    display: flex;
+    justify-content: center;
+    background-color: #F5F5F5;
+    height: 100%;
+    align-items: center;
+
+    .login {
+        width: 100%;
+        max-width: 330px;
+        text-align: center;
+
+        mat-form-field {
+            width: 80%;
+        }
+
+        button {
+            width: 80%;
+            height: 50px;
+        }
+    }
+}
