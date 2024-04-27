@@ -9,6 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginComponent {
   form: FormGroup;
   loading: boolean = false;
 
-  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar) {
+  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private router: Router) {
     this.form = this.fb.group({
       user: ['', Validators.required],
       password: ['', Validators.required]
@@ -55,7 +56,7 @@ export class LoginComponent {
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
-      // Redirect to the dashboard
+      this.router.navigate(['/dashboard'])
     }, 2000);
   }
 
