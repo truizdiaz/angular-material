@@ -1,16 +1,20 @@
 <div class="body">
   <div class="login">
-    <img src="../../../assets/img/user.png" alt="100" width="30%" />
-    <h1>Login</h1>
-    <mat-form-field>
-      <mat-label>User</mat-label>
-      <input autocomplete="off" matInput />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input autocomplete="off" matInput />
-    </mat-form-field>
-    <br>
-    <button mat-flat-button color="primary">Login</button>
+    <mat-spinner *ngIf="loading" diameter="50"></mat-spinner>
+
+    <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="login()">
+      <img src="../../../assets/img/user.png" alt="100" width="30%" />
+      <h1>Login</h1>
+      <mat-form-field>
+        <mat-label>User</mat-label>
+        <input type="text" formControlName="user" autocomplete="off" matInput />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input type="password" formControlName="password" autocomplete="off" matInput />
+      </mat-form-field>
+      <br>
+      <button [disabled]="form.invalid" type="submit" mat-flat-button color="primary">Login</button>
+    </form>
   </div>
 </div>
