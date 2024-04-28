@@ -9,13 +9,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+
+// service
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../interfaces/user';
+
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [MatToolbarModule, MatTableModule, MatIconModule, MatTooltipModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSortModule],
+  imports: [MatToolbarModule, MatTableModule, MatIconModule, MatTooltipModule, 
+    MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSortModule, NgIf, MatSnackBarModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
@@ -23,7 +29,7 @@ export class UsersComponent implements AfterViewInit, OnInit  {
   displayedColumns: string[] = ['username', 'firstName', 'lastName', 'sex', 'accions'];
   dataSource = new MatTableDataSource<User>;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private _snackBar: MatSnackBar) {
 
   }
 
@@ -48,6 +54,17 @@ export class UsersComponent implements AfterViewInit, OnInit  {
     const userList: User[] = this.userService.getListUser();
     this.dataSource = new MatTableDataSource(userList);
 
+  }
+
+  deleteUser(index: number) {
+   this.userService.deleteUser(index);
+   this.getUsers();
+
+   this._snackBar.open('The user was deleted succesfully', '', {
+    horizontalPosition: 'center',
+    verticalPosition: 'bottom',
+    duration: 1500,
+  });
   }
 
 }

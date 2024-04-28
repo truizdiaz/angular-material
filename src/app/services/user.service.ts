@@ -20,4 +20,8 @@ export class UserService {
   getListUser(): User[] {
     return this.listUser.slice();
   }
+
+  deleteUser(index: number) {
+    this.listUser.splice(index,1)
+  }
 }
