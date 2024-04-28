@@ -1,6 +1,6 @@
 <div class="container">
     <mat-toolbar>
-        <span>Add User</span>
+        <span>{{ action }} User</span>
     </mat-toolbar>
     <mat-card>
         <form [formGroup]="form" (ngSubmit)="saveUser()">

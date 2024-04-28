@@ -28,4 +28,16 @@ export class UserService {
   addUser(user: User) {
     this.listUser.unshift(user);
   }
+
+  getUser(index: number) {
+    return this.listUser[index];
+  }
+
+  editUser(user: User, idUser: number) {
+    this.listUser[idUser].userName = user.userName;
+    this.listUser[idUser].firstName = user.firstName;
+    this.listUser[idUser].lastName = user.lastName;
+    this.listUser[idUser].sex = user.sex;
+
+  }
 }
