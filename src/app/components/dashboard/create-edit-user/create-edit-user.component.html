@@ -3,43 +3,46 @@
         <span>Add User</span>
     </mat-toolbar>
     <mat-card>
-        <mat-card-content>
-            <mat-grid-list cols="4" rowHeight="100px">
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                    <mat-form-field>
-                        <mat-label>Username</mat-label>
-                        <input matInput>
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="3" [rowspan]="5">
-                    <img src="../../../../assets/img/user.png" alt="user img" width="250" height="250">
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                    <mat-form-field>
-                        <mat-label>First Name</mat-label>
-                        <input matInput>
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                    <mat-form-field>
-                        <mat-label>Last Name</mat-label>
-                        <input matInput>
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                    <mat-form-field>
-                        <mat-label>Sex</mat-label>
-                        <mat-select>
-                          <mat-option value="male">Male</mat-option>
-                          <mat-option value="female">Female</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                    <button routerLink="/dashboard/users" mat-flat-button style="margin-right: 5px;">BACK</button>
-                    <button mat-flat-button color="primary">ACCEPT</button>
-                </mat-grid-tile>
-            </mat-grid-list>
-        </mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="saveUser()">
+            <mat-card-content>
+                <mat-grid-list cols="4" rowHeight="100px">
+                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Username</mat-label>
+                            <input formControlName="userName" matInput>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="3" [rowspan]="5">
+                        <img src="../../../../assets/img/user.png" alt="user img" width="250" height="250">
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>First Name</mat-label>
+                            <input formControlName="firstName" matInput>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Last Name</mat-label>
+                            <input formControlName="lastName" matInput>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Sex</mat-label>
+                            <mat-select formControlName="sex">
+                              <mat-option value="Male">Male</mat-option>
+                              <mat-option value="Female">Female</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                        <button routerLink="/dashboard/users" mat-flat-button style="margin-right: 5px;">BACK</button>
+                        <button [disabled]="form.invalid" type="submit" mat-flat-button color="primary">ACCEPT</button>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </mat-card-content>
+        </form>
+       
     </mat-card>
 </div>

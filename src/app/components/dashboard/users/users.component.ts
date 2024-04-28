@@ -22,12 +22,12 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [MatToolbarModule, MatTableModule, MatIconModule, MatTooltipModule, 
+  imports: [MatToolbarModule, MatTableModule, MatIconModule, MatTooltipModule,
     MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSortModule, NgIf, MatSnackBarModule, MatButtonModule, RouterLink],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
-export class UsersComponent implements AfterViewInit, OnInit  {
+export class UsersComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['username', 'firstName', 'lastName', 'sex', 'accions'];
   dataSource = new MatTableDataSource<User>;
 
@@ -59,14 +59,14 @@ export class UsersComponent implements AfterViewInit, OnInit  {
   }
 
   deleteUser(index: number) {
-   this.userService.deleteUser(index);
-   this.getUsers();
+    this.userService.deleteUser(index);
+    this.getUsers();
 
-   this._snackBar.open('The user was deleted succesfully', '', {
-    horizontalPosition: 'center',
-    verticalPosition: 'bottom',
-    duration: 1500,
-  });
+    this._snackBar.open('The user was deleted succesfully', '', {
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+      duration: 1500,
+    });
   }
 
 }
