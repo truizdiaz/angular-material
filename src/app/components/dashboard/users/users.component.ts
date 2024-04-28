@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 
 // Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -9,17 +9,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
-
+import { UserService } from '../../../services/user.service';
 import { User } from '../../../interfaces/user';
-
-const listUser: User[] = [
-  { userName: 'jperez', firstName: 'Juan', lastName: 'Perez', sex: 'Male' },
-  { userName: 'tmartinez', firstName: 'Tomas', lastName: 'Martinez', sex: 'Male' },
-  { userName: 'agarcia', firstName: 'Alejandro', lastName: 'Garcia', sex: 'Male' },
-  { userName: 'jrios', firstName: 'Julieta', lastName: 'Rios', sex: 'Female' },
-  { userName: 'mprandi', firstName: 'Mariana', lastName: 'Prandi', sex: 'Male' },
-  { userName: 'sblanda', firstName: 'Sofia', lastName: 'Blanda', sex: 'Female' },
-];
 
 @Component({
   selector: 'app-users',
@@ -28,9 +19,17 @@ const listUser: User[] = [
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
-export class UsersComponent implements AfterViewInit  {
+export class UsersComponent implements AfterViewInit, OnInit  {
   displayedColumns: string[] = ['username', 'firstName', 'lastName', 'sex', 'accions'];
-  dataSource = new MatTableDataSource(listUser);
+  dataSource = new MatTableDataSource<User>;
+
+  constructor(private userService: UserService) {
+
+  }
+
+  ngOnInit(): void {
+    this.getUsers();
+  }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -43,6 +42,12 @@ export class UsersComponent implements AfterViewInit  {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  getUsers() {
+    const userList: User[] = this.userService.getListUser();
+    this.dataSource = new MatTableDataSource(userList);
+
   }
 
 }
