@@ -1,6 +1,8 @@
 <div class="container">
   <mat-toolbar>
     <span>Users</span>
+    <span class="example-spacer"></span>
+    <button routerLink="/dashboard/createUser" mat-flat-button color="primary">ADD USER</button>
   </mat-toolbar>
 
   <div *ngIf="dataSource.data.length > 0">
